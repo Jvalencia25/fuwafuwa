@@ -159,9 +159,7 @@ public class Lista<T> implements Iterable<T> {
 
         mergeSort(left);
         mergeSort(right);
-        System.out.println("\nslay\n");
-        Lista res = fusionar(left, right);
-        res.imprimir();
+        fusionar(left, right);
    }
 
 
