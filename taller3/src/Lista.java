@@ -149,26 +149,19 @@ public class Lista<T> implements Iterable<T> {
   
         return result;
     }
-
-    public Lista[] mergeSort(Lista a){
-        Lista[] aux = a.split(a);
-        Lista[] resultado = new Lista[a.size()];
-        Lista left = aux[0];
-        Lista right = aux[1];
-        int i=0;
-
-        while(left.size()>=1 && right.size()>=1){
-            System.out.println("\n---\nCiclo nro" + i++ + "\n---\n");
-            System.out.println("LEFT");
-            left.imprimir();
-            System.out.println("RIGHT");
-            right.imprimir();
-            aux = left.split(left);
-            left = aux[0];
-            right = aux[1];
+    public void mergeSort(Lista a){
+        if(a.size()<2){
+            return;
         }
-        System.out.println("-");
-        return aux;
+        Lista[] tmp = a.split(a);
+        Lista left = tmp[0];
+        Lista right = tmp[1];
+        System.out.println("\nLEFT");
+        left.imprimir();
+        System.out.println("\nRIGHT");
+        right.imprimir();
+        mergeSort(left);
+        mergeSort(right);  
    }
 
 
@@ -259,7 +252,7 @@ public class Lista<T> implements Iterable<T> {
         probando.add(1);
         probando.add(21);
         probando.add(4);
-        Lista[] hola = probando.mergeSort(probando);
+        probando.mergeSort(probando);
 
 
         
