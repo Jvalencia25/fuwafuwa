@@ -150,7 +150,20 @@ public class Lista<T> implements Iterable<T> {
         return result;
     }
 
+    public Lista[] mergeSort(Lista a){
+        Lista[] aux = a.split(a);
+        for(int i=0;i<a.size();i++){
+            Lista halfl = aux[0];
+            Lista halfr = aux[1];
+            System.out.println("hola ");
+            halfl.imprimir();
+            System.out.println("hola ");
+            halfr.imprimir();
 
+        }
+
+        return aux;
+   }
 
 
 
@@ -203,11 +216,13 @@ public class Lista<T> implements Iterable<T> {
         a.add(1);
         a.add(3);
         a.add(5);
+        a.add(8);
 
         Lista b = new Lista<>();
         b.add(2);
         b.add(4);
         b.add(6);
+        b.add(10);
 
 
         Lista resultado = fusionar(a, b);
@@ -215,23 +230,19 @@ public class Lista<T> implements Iterable<T> {
         assert(resultado.get(0).equals(1));
         assert(resultado.get(5).equals(6));
         assert(resultado.size()==6);
-        resultado.imprimir();
+        //resultado.imprimir();
 
         //prueba unitaria split
 
         Lista [] arregloListas= resultado.split(resultado);
 
         System.out.println(" ");
-        arregloListas[0].imprimir();
+        //arregloListas[0].imprimir();
         System.out.println(" ");
-        arregloListas[1].imprimir();
+        //arregloListas[1].imprimir(); 
 
-
-      
+        //prueba unitaria mergeSort
+        Lista[] hola = resultado.mergeSort(resultado);
 
     }
-
-    
-
-
 }
