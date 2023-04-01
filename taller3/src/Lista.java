@@ -156,12 +156,12 @@ public class Lista<T> implements Iterable<T> {
         Lista[] tmp = a.split(a);
         Lista left = tmp[0];
         Lista right = tmp[1];
-        System.out.println("\nLEFT");
-        left.imprimir();
-        System.out.println("\nRIGHT");
-        right.imprimir();
+
         mergeSort(left);
-        mergeSort(right);  
+        mergeSort(right);
+        System.out.println("\nslay\n");
+        Lista res = fusionar(left, right);
+        res.imprimir();
    }
 
 
