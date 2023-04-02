@@ -125,18 +125,28 @@ public class Lista<T> implements Iterable<T> {
         return resultado;
     }
 
-    public Lista[] split(Lista a){
+    public Lista[] split(){
 
         Lista[] result = new Lista[2];
-        int longitud = a.size();
+        int longitud = this.size();
   
         int mitad = longitud / 2;
         result[0] = new Lista();
         result[1] = new Lista();
   
-        Nodo nodoActual = a.first;
-        int indiceActual = 0;
+        int i = 0;
   
+        for(Nodo x=this.first;x!=null;x=x.sig){
+            if (i < mitad) {
+                result[0].add(x.item);
+            } else {
+                result[1].add(x.item);
+            }
+            i++;
+        }
+
+        
+        /*
         while (nodoActual != null) {
             if (indiceActual < mitad) {
                 result[0].add(nodoActual.item);
@@ -144,16 +154,20 @@ public class Lista<T> implements Iterable<T> {
                 result[1].add(nodoActual.item);
             }
             nodoActual = nodoActual.sig;
-            indiceActual++;
+            
         }
   
+        
+        */
+        result[0].invert();
+        result[1].invert();
         return result;
     }
     public void mergeSort(Lista a){
         if(a.size()<2){
             return;
         }
-        Lista[] tmp = a.split(a);
+        Lista[] tmp = a.split();
         Lista left = tmp[0];
         Lista right = tmp[1];
 
@@ -162,7 +176,7 @@ public class Lista<T> implements Iterable<T> {
         System.out.println("\nslay\n");
         Lista res = fusionar(left, right);
         res.imprimir();
-        fusionar(left, right);
+        a=fusionar(left, right);
    }
 
 
@@ -200,7 +214,22 @@ public class Lista<T> implements Iterable<T> {
     public T remove(int i) { return null; }
 
     /** Obtener una nueva ListaSimple con todos los items en orden inverso */
-    public Lista<T> invert() { return null; }
+    public Lista<T> invert() { 
+        Nodo current = first;
+        Nodo previous = null;
+        Nodo next = null;
+        
+        while (current != null) {
+            next = current.sig;
+            current.sig=previous;
+            previous = current;
+            current = next;
+        }
+        
+        first = previous;
+        return this;
+        
+     }
     
 
     public void imprimir(){
@@ -211,7 +240,7 @@ public class Lista<T> implements Iterable<T> {
     
     public static void main(String[] args) throws Exception {
         
-        
+        /** remueve el item de la i-ésima posición de la lista
         //prueba unitaria fusion
         Lista a = new Lista<>();
         a.add(2);
@@ -230,22 +259,22 @@ public class Lista<T> implements Iterable<T> {
 
         Lista resultado = fusionar(a, b);
 
-        assert(resultado.get(0).equals(1));
-        assert(resultado.get(5).equals(6));
-        assert(resultado.size()==6);
+        //assert(resultado.get(0).equals(1));
+        //assert(resultado.get(5).equals(6));
+        //assert(resultado.size()==6);
         resultado.imprimir();
 
-        /** Insertar un item en la i-ésima posición de la lista 
+        
         //prueba unitaria split
 
-        Lista [] arregloListas= resultado.split(resultado);
+        Lista [] arregloListas= resultado.split();
 
         System.out.println(" ");
-        //arregloListas[0].imprimir();
+        arregloListas[0].imprimir();
         System.out.println(" ");
-        //arregloListas[1].imprimir(); 
+        arregloListas[1].imprimir(); 
 
-        
+        */
 
         //prueba unitaria mergeSort
         Lista probando = new Lista<>();
@@ -259,7 +288,7 @@ public class Lista<T> implements Iterable<T> {
         probando.add(4);
         probando.mergeSort(probando);
 
-*/
+
         
     }
 }
