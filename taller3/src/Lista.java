@@ -159,6 +159,9 @@ public class Lista<T> implements Iterable<T> {
 
         mergeSort(left);
         mergeSort(right);
+        System.out.println("\nslay\n");
+        Lista res = fusionar(left, right);
+        res.imprimir();
         fusionar(left, right);
    }
 
@@ -208,19 +211,20 @@ public class Lista<T> implements Iterable<T> {
     
     public static void main(String[] args) throws Exception {
         
+        
         //prueba unitaria fusion
         Lista a = new Lista<>();
-        a.add(1);
-        a.add(3);
-        a.add(5);
-        a.add(8);
+        a.add(2);
+        a.add(10);
+        a.add(15);
+        //a.add(8);
 
 
         Lista b = new Lista<>();
-        b.add(2);
-        b.add(4);
-        b.add(6);
-        b.add(10);
+        b.add(3);
+        b.add(11);
+        b.add(14);
+        //b.add(10);
 
 
 
@@ -229,8 +233,9 @@ public class Lista<T> implements Iterable<T> {
         assert(resultado.get(0).equals(1));
         assert(resultado.get(5).equals(6));
         assert(resultado.size()==6);
-        //resultado.imprimir();
+        resultado.imprimir();
 
+        /** Insertar un item en la i-ésima posición de la lista 
         //prueba unitaria split
 
         Lista [] arregloListas= resultado.split(resultado);
@@ -239,6 +244,8 @@ public class Lista<T> implements Iterable<T> {
         //arregloListas[0].imprimir();
         System.out.println(" ");
         //arregloListas[1].imprimir(); 
+
+        
 
         //prueba unitaria mergeSort
         Lista probando = new Lista<>();
@@ -252,7 +259,7 @@ public class Lista<T> implements Iterable<T> {
         probando.add(4);
         probando.mergeSort(probando);
 
-
+*/
         
     }
 }
