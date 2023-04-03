@@ -1,7 +1,5 @@
 import java.util.Iterator;
 
-import javax.sound.sampled.SourceDataLine;
-
 /**
  * ListaSimple : Implementacion basica de la lista simplemente enlazada
  * Se proponen como ejercicios operaciones adicionales de la 
@@ -101,13 +99,16 @@ public class Lista<T> implements Iterable<T> {
         int i = 0; // iterador a
         int j = 0; // iterador b
 
-        while (i < a.size() && j < b.size()) {
-            if (a.get(i).compareTo(b.get(j)) <= 0) { //si a.item es menor, agrega primero a b.item
-                resultado.add(a.get(i));
-                i++;
+        while (i < a.size() && j < b.size()) { // O(n + m) siendo n el tamaño de a y m el tamaño de b
+            Comparable elementoA = a.get(i); 
+            Comparable elementoB = b.get(j); 
+    
+            if (elementoA.compareTo(elementoB) > 0) { 
+                resultado.add(elementoA); 
+                i++; 
             } else {
-                resultado.add(b.get(j));
-                j++;
+                resultado.add(elementoB); 
+                j++; 
             }
         }
         
@@ -130,6 +131,7 @@ public class Lista<T> implements Iterable<T> {
         Lista[] result = new Lista[2];
         int longitud = this.size();
   
+        //sacar la mitad
         int mitad = longitud / 2;
         if (longitud % 2 != 0) {
             mitad++; 
@@ -140,19 +142,17 @@ public class Lista<T> implements Iterable<T> {
   
         int i = 0;
   
-        for(Nodo x=this.first;x!=null;x=x.sig){
+        for(Nodo x=this.first;x!=null;x=x.sig){ //n nodos
             if (i < mitad) {
-                result[0].add(x.item);
+                result[0].add(x.item); //1 acceso
             } else {
-                result[1].add(x.item);
+                result[1].add(x.item); //1 acceso
             }
             i++;
         }
-
         return result;
     }
 
-    int xd=0;
     public Lista<Comparable> mergeSort(Lista<Comparable> a){
         if(a.size()<2){
             return a;
@@ -166,20 +166,6 @@ public class Lista<T> implements Iterable<T> {
 
         return fusionar(left, right);
    }
-
-
-
-
-
-    /*
-     *   Ejercicios: Implementar los siguientes métodos
-     */
-
-    /** Remueve el ultimo elemento de la lista */
-    public T removeLast() { return null; }
-
-    /** Agregar un elemento al final de la lista */
-    public void addLast() {  }
 
     /** Obtener el item en la i-ésima posición de la lista */
     public T get(int indice) {
@@ -210,9 +196,8 @@ public class Lista<T> implements Iterable<T> {
         return this;
         
      }
-    
 
-    public void imprimir(){
+    public void imprimir(){ 
         System.out.println("lista:");
         for(Nodo x=this.first;x!=null;x=x.sig){
             System.out.println(x.item);
@@ -222,39 +207,38 @@ public class Lista<T> implements Iterable<T> {
     
     public static void main(String[] args) throws Exception {
         
-        /* 
+        
         //prueba unitaria fusion
+        System.out.println("Prueba fusión");
         Lista a = new Lista<>();
-        a.add(50);
         a.add(9);
-        //a.add(3);
-        //a.add(1);
+        a.add(7);
+        a.add(5);
+        a.add(3);
+        a.add(1);
         a.imprimir();
-
 
         System.out.println("");
 
         Lista b = new Lista<>();
-        b.add(14);
+        b.add(8);
+        b.add(6);
+        b.add(4);
         b.add(2);
-        //b.add(4);
-        //b.add(2);
-
-
         b.imprimir();
 
         System.out.println("\nResultado");
 
         Lista resultado = fusionar(a, b);
 
-        //assert(resultado.get(0).equals(1));
-        //assert(resultado.get(5).equals(6));
-        //assert(resultado.size()==6);
+        assert(resultado.get(0).equals(1));
+        assert(resultado.get(5).equals(6));
+        assert(resultado.size()==6);
         resultado.imprimir();
 
         
         //prueba unitaria split
-        System.out.println("Split");
+        System.out.println("Prueba Split");
         Lista [] arregloListas= resultado.split();
 
         System.out.println(" ");
@@ -262,10 +246,8 @@ public class Lista<T> implements Iterable<T> {
         System.out.println(" ");
         arregloListas[1].imprimir(); 
 
-        */
-
-         
         //prueba unitaria mergeSort
+        System.out.println("Prueba MergeSort");
         Lista probando = new Lista<>();
         probando.add(9);
         probando.add(50);
@@ -280,7 +262,6 @@ public class Lista<T> implements Iterable<T> {
         probando.add(400);
         probando=probando.mergeSort(probando);
         
-        probando.imprimir();
-        
+        probando.imprimir();  
     }
 }
