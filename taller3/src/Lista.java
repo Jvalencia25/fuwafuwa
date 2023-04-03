@@ -165,27 +165,6 @@ public class Lista<T> implements Iterable<T> {
         return result;
     }
 
-    /**public void mergeSort(Lista a){
-        ArrayList aux = new ArrayList<>();
-        for(int i=0;i<a.size();i++){
-            aux.add(a.get(i));
-        }
-        
-        if(a.size()<2) return;
-
-
-        //System.out.println("\nLEFT\n");
-        //left.imprimir();
-
-        //System.out.println("\nRIGHT\n");
-       //right.imprimir();
-
-        //mergeSort(left);
-        //mergeSort(right);
-
-        //a.imprimir();
-   }*/
-
    public static void mergeSort(ArrayList<Integer> list) {
     if (list.size() > 1) {
       int mid = list.size() / 2;
@@ -317,35 +296,42 @@ public class Lista<T> implements Iterable<T> {
         */
 
         //prueba unitaria mergeSort
-        Lista probando = new Lista<>();
-        ArrayList<Integer> test = new ArrayList<Integer>();
+        Lista actual = new Lista<>();
+        ArrayList<Integer> expected = new ArrayList<Integer>();
 
-        test.add(2);
-        test.add(3);
-        test.add(8);
-        test.add(10);
-        test.add(10);
-        test.add(11);
-        test.add(14);
-        test.add(15);
+        expected.add(2);
+        expected.add(3);
+        expected.add(8);
+        expected.add(10);
+        expected.add(10);
+        expected.add(11);
+        expected.add(14);
+        expected.add(15);
 
-        probando.add(2);
-        probando.add(10);
-        probando.add(15);
-        probando.add(8);
-        probando.add(3);
-        probando.add(11);
-        probando.add(14);
-        probando.add(10);
+        actual.add(2);
+        actual.add(10);
+        actual.add(15);
+        actual.add(8);
+        actual.add(3);
+        actual.add(11);
+        actual.add(14);
+        actual.add(10);
+
+        ArrayList actual_int = toIntArray(actual);
         
-        ArrayList prueba = toIntArray(probando);
-        mergeSort(prueba);
-        if(prueba.equals(test)){
-            System.out.println("ESO PAPUS");
-        }else System.out.println("NOOO PAPUS");
-        //hola.imprimir();
+        System.out.println("\nAntes del mergesort");
+        for(int i=0;i<actual_int.size();i++){
+            System.out.print(" | " + actual_int.get(i));
+        }
 
+        mergeSort(actual_int);
 
-        
+        System.out.println("\n\nDespués del mergesort");
+        for(int i=0;i<actual_int.size();i++){
+            System.out.print(" | " + actual_int.get(i));
+        }
+
+        assert(actual_int.equals(expected));
+    
     }
 }
