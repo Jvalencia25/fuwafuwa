@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -163,24 +164,63 @@ public class Lista<T> implements Iterable<T> {
         result[1].invert();
         return result;
     }
-    public void mergeSort(Lista a){
-        if(a.size()<2){
-            return;
+
+    /**public void mergeSort(Lista a){
+        ArrayList aux = new ArrayList<>();
+        for(int i=0;i<a.size();i++){
+            aux.add(a.get(i));
         }
-        Lista[] tmp = a.split();
-        Lista left = tmp[0];
-        Lista right = tmp[1];
-
-        mergeSort(left);
-        mergeSort(right);
-        System.out.println("\nslay\n");
-        Lista res = fusionar(left, right);
-        res.imprimir();
-        a=fusionar(left, right);
-   }
+        
+        if(a.size()<2) return;
 
 
+        //System.out.println("\nLEFT\n");
+        //left.imprimir();
 
+        //System.out.println("\nRIGHT\n");
+       //right.imprimir();
+
+        //mergeSort(left);
+        //mergeSort(right);
+
+        //a.imprimir();
+   }*/
+
+   public static void mergeSort(ArrayList<Integer> list) {
+    if (list.size() > 1) {
+      int mid = list.size() / 2;
+      ArrayList<Integer> left = new ArrayList<Integer>(list.subList(0, mid));
+      ArrayList<Integer> right = new ArrayList<Integer>(list.subList(mid, list.size()));
+      mergeSort(left);
+      mergeSort(right);
+      merge(list, left, right);
+    }
+  }
+
+  private static void merge(ArrayList<Integer> list, ArrayList<Integer> left, ArrayList<Integer> right) {
+    int i = 0, j = 0, k = 0;
+    while (i < left.size() && j < right.size()) {
+      if (left.get(i) < right.get(j)) {
+        list.set(k++, left.get(i++));
+      } else {
+        list.set(k++, right.get(j++));
+      }
+    }
+    while (i < left.size()) {
+      list.set(k++, left.get(i++));
+    }
+    while (j < right.size()) {
+      list.set(k++, right.get(j++));
+    }
+  }
+
+  public static ArrayList<Integer> toIntArray(Lista a){
+    ArrayList aux = new ArrayList<>();
+        for(int i=0;i<a.size();i++){
+            aux.add(a.get(i));
+        }
+    return aux;
+  }
 
 
     /*
@@ -278,15 +318,32 @@ public class Lista<T> implements Iterable<T> {
 
         //prueba unitaria mergeSort
         Lista probando = new Lista<>();
-        probando.add(9);
-        probando.add(50);
-        probando.add(14);
+        ArrayList<Integer> test = new ArrayList<Integer>();
+
+        test.add(2);
+        test.add(3);
+        test.add(8);
+        test.add(10);
+        test.add(10);
+        test.add(11);
+        test.add(14);
+        test.add(15);
+
         probando.add(2);
-        probando.add(16);
-        probando.add(1);
-        probando.add(21);
-        probando.add(4);
-        probando.mergeSort(probando);
+        probando.add(10);
+        probando.add(15);
+        probando.add(8);
+        probando.add(3);
+        probando.add(11);
+        probando.add(14);
+        probando.add(10);
+        
+        ArrayList prueba = toIntArray(probando);
+        mergeSort(prueba);
+        if(prueba.equals(test)){
+            System.out.println("ESO PAPUS");
+        }else System.out.println("NOOO PAPUS");
+        //hola.imprimir();
 
 
         
