@@ -2,7 +2,8 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.nio.charset.StandardCharsets;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.princeton.cs.algs4.StdIn;
 
@@ -55,8 +56,8 @@ public class GeneradorADTs {
         StdOut.println(sb);
     }
 
-    public static Lista<Person> generar(int n) {
-        Lista<Person> personas = new Lista<>();
+    public static List<Person> generar(int n) {
+        ArrayList<Person> personas = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int genero = StdRandom.uniform(0, 2);
             String nombre1, nombre2;
@@ -79,7 +80,7 @@ public class GeneradorADTs {
 
     public static void main(String[] args) {
         // arrayFromInput();
-        Lista<Person> personas = generar(10);
+        List<Person> personas = generar(10);
         for (Person p : personas)
             StdOut.println(p);
 

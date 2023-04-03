@@ -103,7 +103,7 @@ public class Lista<T> implements Iterable<T> {
             Comparable elementoA = a.get(i); 
             Comparable elementoB = b.get(j); 
     
-            if (elementoA.compareTo(elementoB) > 0) { 
+            if (elementoA.compareTo(elementoB) <= 0) { 
                 resultado.add(elementoA); 
                 i++; 
             } else {
@@ -232,8 +232,8 @@ public class Lista<T> implements Iterable<T> {
         Lista resultado = fusionar(a, b);
 
         assert(resultado.get(0).equals(1));
-        assert(resultado.get(5).equals(6));
-        assert(resultado.size()==6);
+        assert(resultado.get(8).equals(9));
+        assert(resultado.size()==8);
         resultado.imprimir();
 
         
@@ -245,6 +245,10 @@ public class Lista<T> implements Iterable<T> {
         arregloListas[0].imprimir();
         System.out.println(" ");
         arregloListas[1].imprimir(); 
+
+        assert(arregloListas[0].get(0).equals(5));
+        assert(arregloListas[1].get(3).equals(6));
+        assert(arregloListas[0].size()==4 && arregloListas[1].size()==4);
 
         //prueba unitaria mergeSort
         System.out.println("Prueba MergeSort");
@@ -261,6 +265,9 @@ public class Lista<T> implements Iterable<T> {
         probando.add(7);
         probando.add(400);
         probando=probando.mergeSort(probando);
+
+        assert(probando.get(0).equals(1));
+        assert(probando.get(10).equals(400));
         
         probando.imprimir();  
     }
